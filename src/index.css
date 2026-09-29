@@ -1,0 +1,574 @@
+@import "tailwindcss";
+
+/* ══════════════════════════════════════════════════════════
+   ADITHYA MECHNEXUS — V15 DESIGN SYSTEM
+   Futuristic Mechanical Engineering Digital Laboratory
+   ══════════════════════════════════════════════════════════ */
+
+@theme {
+  --color-void: #07080B;
+  --color-surface: #0F1117;
+  --color-elevated: #171A23;
+  --color-elevated-hover: #212533;
+  --color-steel: #2B3042;
+  --color-titanium: #424962;
+
+  --color-cyan: #00D4FF;
+  --color-cyan-dim: #0099CC;
+  --color-cyan-bright: #38E1FF;
+
+  --color-blue: #38BDF8;
+  --color-blue-dim: #0284C7;
+
+  --color-amber: #F59E0B;
+  --color-amber-dim: #D97706;
+
+  --color-copper: #D4844A;
+
+  --color-text-primary: #F8FAFC;
+  --color-text-secondary: #94A3B8;
+  --color-text-tertiary: #64748B;
+
+  --color-status-online: #10B981;
+  --color-status-warning: #F59E0B;
+  --color-status-error: #EF4444;
+
+  --font-display: 'Space Grotesk', -apple-system, sans-serif;
+  --font-body: 'Inter', -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'IBM Plex Mono', monospace;
+
+  --ease-signature: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-mechanical: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-organic: cubic-bezier(0.37, 0, 0.63, 1);
+}
+
+:root {
+  /* ---- Base / Surfaces ---- */
+  --bg-void:            #07080B;   /* deep carbon black */
+  --bg-surface:         #0F1117;   /* dark titanium graphite */
+  --bg-elevated:        #171A23;   /* gunmetal HUD surfaces */
+  --bg-elevated-hover:  #212533;
+  --color-steel:        #2B3042;
+  --color-titanium:     #424962;
+
+  /* ---- Engineering Accents ---- */
+  --color-cyan:         #00D4FF;
+  --color-cyan-dim:     #0099CC;
+  --color-cyan-bright:  #38E1FF;
+  --color-cyan-glow:    rgba(0, 212, 255, 0.22);
+
+  --color-blue:         #38BDF8;
+  --color-blue-dim:     #0284C7;
+
+  --color-amber:        #F59E0B;
+  --color-amber-dim:    #D97706;
+  --color-amber-glow:   rgba(245, 158, 11, 0.22);
+
+  --color-copper:       #D4844A;
+
+  /* ---- Technical Typography ---- */
+  --text-primary:       #F8FAFC;   /* high-contrast technical white */
+  --text-secondary:     #94A3B8;   /* cool grey */
+  --text-tertiary:      #64748B;   /* cadence grey */
+
+  /* ---- Functional Status ---- */
+  --status-online:      #10B981;
+  --status-warning:     #F59E0B;
+  --status-error:       #EF4444;
+
+  /* ---- Structural Hairlines ---- */
+  --border-hairline:    rgba(255, 255, 255, 0.08);
+  --border-cyan-glow:   rgba(0, 212, 255, 0.35);
+  --border-amber-glow:  rgba(245, 158, 11, 0.35);
+
+  /* ---- Motion ---- */
+  --ease-signature:     cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-mechanical:    cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-organic:       cubic-bezier(0.37, 0, 0.63, 1);
+
+  /* ---- Brand Gradients ---- */
+  --gradient-mechnexus: linear-gradient(135deg, #00D4FF 0%, #38BDF8 60%, #0284C7 100%);
+  --gradient-mechnexus-soft: linear-gradient(135deg, rgba(0,212,255,0.12) 0%, rgba(56,189,248,0.06) 100%);
+  --gradient-amber-soft: linear-gradient(135deg, rgba(245,158,11,0.12) 0%, rgba(217,119,6,0.04) 100%);
+}
+
+/* ─── Global Reset ─── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-color: var(--bg-void);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-void);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ─── Custom Cursor Activation: ONLY on public pages when explicitly enabled ─── */
+@media (pointer: fine) {
+  body.custom-cursor-active,
+  body.custom-cursor-active * {
+    cursor: none !important;
+  }
+}
+
+/* ─── Admin Console & Safe Mode: NATIVE SYSTEM CURSOR ABSOLUTE ENFORCEMENT ─── */
+html[data-route="admin"],
+html[data-route="admin"] *,
+body.admin-mode,
+body.admin-mode *,
+.admin-mode,
+.admin-mode *,
+.admin-layout,
+.admin-layout *,
+.admin-portal,
+.admin-portal * {
+  cursor: auto !important;
+}
+
+body.admin-mode input,
+body.admin-mode textarea,
+body.admin-mode [contenteditable],
+.admin-layout input,
+.admin-layout textarea,
+.admin-portal input,
+.admin-portal textarea {
+  cursor: text !important;
+}
+
+body.admin-mode button,
+body.admin-mode a,
+body.admin-mode select,
+body.admin-mode label,
+body.admin-mode [role="button"],
+body.admin-mode [data-interactive],
+.admin-layout button,
+.admin-layout a,
+.admin-layout select,
+.admin-layout label,
+.admin-layout [role="button"],
+.admin-portal button,
+.admin-portal a,
+.admin-portal select,
+.admin-portal label {
+  cursor: pointer !important;
+}
+
+body.admin-mode [disabled],
+body.admin-mode button:disabled,
+body.admin-mode input:disabled,
+.admin-layout [disabled],
+.admin-layout button:disabled {
+  cursor: not-allowed !important;
+}
+
+/* ─── Admin Console Structural & Component Architecture ─── */
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--color-void);
+  color: var(--color-text-primary);
+  position: relative;
+  width: 100%;
+}
+
+.admin-sidebar {
+  width: 280px;
+  flex-shrink: 0;
+  background-color: #0c0d12;
+  border-right: 1px solid rgba(255, 255, 255, 0.07);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.5rem 1rem;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  overflow-y: auto;
+  z-index: 30;
+}
+
+@media (max-width: 1023px) {
+  .admin-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease-in-out;
+  }
+  .admin-sidebar.open {
+    transform: translateX(0);
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.85);
+  }
+}
+
+.admin-main {
+  flex: 1;
+  min-width: 0;
+  padding: 2rem 2.5rem 4rem;
+  overflow-y: auto;
+  background: radial-gradient(circle at 80% 10%, rgba(0, 212, 255, 0.03) 0%, transparent 50%),
+              radial-gradient(circle at 10% 90%, rgba(56, 189, 248, 0.02) 0%, transparent 50%),
+              var(--color-void);
+}
+
+@media (max-width: 768px) {
+  .admin-main {
+    padding: 1.25rem 1rem 3rem;
+  }
+}
+
+.eng-card {
+  background: rgba(15, 17, 23, 0.82);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.75rem;
+  position: relative;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.eng-card:hover {
+  border-color: rgba(0, 212, 255, 0.25);
+}
+
+.eng-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.1rem;
+  border-radius: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer !important;
+  user-select: none;
+  border: 1px solid transparent;
+}
+
+.eng-btn-primary {
+  background: linear-gradient(135deg, #00D4FF 0%, #0284C7 100%);
+  color: #07080B !important;
+  box-shadow: 0 0 15px rgba(0, 212, 255, 0.25);
+}
+
+.eng-btn-primary:hover:not(:disabled) {
+  box-shadow: 0 0 25px rgba(0, 212, 255, 0.45);
+  transform: translateY(-1px);
+}
+
+.eng-btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed !important;
+}
+
+.eng-btn-secondary {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--color-text-primary);
+}
+
+.eng-btn-secondary:hover:not(:disabled) {
+  background: rgba(0, 212, 255, 0.08);
+  border-color: rgba(0, 212, 255, 0.35);
+  color: var(--color-cyan);
+}
+
+.eng-btn-danger {
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #fca5a5;
+}
+
+.eng-btn-danger:hover:not(:disabled) {
+  background: rgba(239, 68, 68, 0.22);
+  border-color: rgba(239, 68, 68, 0.6);
+  color: #ffffff;
+}
+
+.eng-btn-ghost {
+  background: transparent;
+  color: var(--color-text-secondary);
+}
+
+.eng-btn-ghost:hover:not(:disabled) {
+  color: var(--color-cyan);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.eng-input {
+  width: 100%;
+  background: rgba(7, 8, 11, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  padding: 0.625rem 0.875rem;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  color: var(--color-text-primary);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  outline: none;
+}
+
+.eng-input:focus {
+  border-color: var(--color-cyan);
+  box-shadow: 0 0 12px rgba(0, 212, 255, 0.2);
+}
+
+.eng-input::placeholder {
+  color: var(--color-text-tertiary);
+}
+
+.eng-textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.eng-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2300D4FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  padding-right: 2rem;
+}
+
+/* ─── Typography Utility Classes ─── */
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* ─── Custom Engineering Scrollbar ─── */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* ─── Drafting Grid Line Backgrounds ─── */
+.eng-grid {
+  background-image: 
+    linear-gradient(to right, rgba(0, 212, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 212, 255, 0.035) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.eng-grid-dense {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.blueprint-grid {
+  background-image: 
+    linear-gradient(to right, rgba(56, 189, 248, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(56, 189, 248, 0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* ─── Title-Block Drafting Motif ─── */
+.title-block-box {
+  border: 1px dashed rgba(0, 212, 255, 0.22);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--text-tertiary);
+  padding: 6px 10px;
+  background: rgba(15, 17, 23, 0.85);
+  backdrop-filter: blur(6px);
+  user-select: none;
+}
+
+/* ─── Scanline Photo Reveal Animation ─── */
+@keyframes scanlineReveal {
+  0% {
+    clip-path: inset(0 0 100% 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.scanline-reveal {
+  animation: scanlineReveal 400ms var(--ease-signature) forwards;
+}
+
+/* ─── Precision Ring Spin Animation ─── */
+@keyframes ringSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-ring-spin {
+  animation: ringSpin 8s linear infinite;
+}
+
+/* ─── HUD Corner Reticle (Preserved for Admin/DigitalTwin) ─── */
+.hud-corner-tl {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-top: 1.5px solid var(--color-cyan);
+  border-left: 1.5px solid var(--color-cyan);
+  pointer-events: none;
+}
+
+.hud-corner-tr {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 8px;
+  height: 8px;
+  border-top: 1.5px solid var(--color-cyan);
+  border-right: 1.5px solid var(--color-cyan);
+  pointer-events: none;
+}
+
+.hud-corner-bl {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-bottom: 1.5px solid var(--color-cyan);
+  border-left: 1.5px solid var(--color-cyan);
+  pointer-events: none;
+}
+
+.hud-corner-br {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 8px;
+  height: 8px;
+  border-bottom: 1.5px solid var(--color-cyan);
+  border-right: 1.5px solid var(--color-cyan);
+  pointer-events: none;
+}
+
+/* ─── Reduced Motion Support ─── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .animate-pulse,
+  .animate-ring-spin {
+    animation: none !important;
+  }
+}
+
+/* ─── Focus Visible (Accessibility) ─── */
+:focus-visible {
+  outline: 2px solid var(--color-cyan);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ─── Modal Overlay & Panel ─── */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(7, 8, 11, 0.82);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.modal-content {
+  position: relative;
+  width: 100%;
+  max-width: 36rem;
+  background: #0F1117;
+  border: 1px solid rgba(0, 212, 255, 0.18);
+  border-radius: 0.875rem;
+  padding: 1.5rem;
+  box-shadow:
+    0 0 0 1px rgba(0, 212, 255, 0.08),
+    0 25px 60px rgba(0, 0, 0, 0.7),
+    0 0 40px rgba(0, 212, 255, 0.06);
+  max-height: calc(100dvh - 2rem);
+  overflow-y: auto;
+}
+
+/* ─── Toggle Switch Component ─── */
+.eng-toggle {
+  position: relative;
+  width: 40px;
+  height: 22px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.06);
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer !important;
+  flex-shrink: 0;
+  outline: none;
+}
+
+.eng-toggle::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.eng-toggle.active {
+  background: rgba(0, 212, 255, 0.22);
+  border-color: rgba(0, 212, 255, 0.55);
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.25);
+}
+
+.eng-toggle.active::after {
+  transform: translateX(18px);
+  background: var(--color-cyan);
+}
+
